@@ -1,0 +1,15 @@
+*.zip
+*.7z
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.history
+.VSCodeCounter
+9.22BYD
+*.tif
+*.png
+*.txt

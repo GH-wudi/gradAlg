@@ -1,0 +1,14 @@
+{
+    "train":{
+
+    },
+    "predict":{
+        "img":"D:\\Code\\Al\\jz\\rpcortho_bydquyu_jz.tif",
+        "out_path":"",
+        "out_img":"D:\\Users\\Emc2\\Desktop\\test\\test.png",
+        "out_tif":"D:\\Users\\Emc2\\Desktop\\test\\test.tif",
+        "bands":[2],
+        "cmap":"Greens",
+        "dpi":1000
+    }
+}
