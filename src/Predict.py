@@ -7,7 +7,7 @@ from matplotlib.font_manager import FontProperties
 from osgeo import gdal
 from tensorflow.python import keras
 
-from IO import get_band, read_para, write_image
+from IO import get_band, read_json, write_image
 from Train import standardization
 
 
@@ -107,7 +107,7 @@ def visualization(img, out_path, cmap, dpi):
 
 if __name__ == '__main__':
 	start = time.perf_counter()
-	para = read_para('./parameters.json')
+	para = read_json('./parameters.json')
 	pred = para["predict"]
 	# mask(pred["img"],pred["shp_file"],pred["out_tif"])
 	dataset = gdal.Open(pred["img"])

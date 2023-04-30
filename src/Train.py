@@ -4,11 +4,13 @@ Created on Sat Jan 15 11:45:03 2021
 @author: wfh
 """
 import os
+import json
 import numpy as np
 import pandas as pd
 import tensorflow as tf
 
 from osgeo import gdal
+from IO import read_json
 from toEach import lonlat2imagexy
 
 
@@ -43,7 +45,7 @@ def lonlat2DN(dataset, lon_list, lat_list):
     DN = []
     for i in range(len(lat_list)):
         row, col = lonlat2imagexy(dataset, lon_list[i], lat_list[i])
-        radiation_value = dataset.ReadAsArray(row, col, 1, 1)
+        radiation_value = dataset.ReadAsArray(row, col, 3, 3)
         for j in range(dataset.RasterCount):
             DN.append(radiation_value[j][0][0])
     # DN = standardization(DN)
@@ -80,11 +82,12 @@ def read_data(excel_path, sheet_name, usecols):
     """
     sheet = pd.read_excel(
         io=excel_path, sheet_name=sheet_name, usecols=usecols)
-    return np.array(sheet.values)
+    return sheet.values
 
 
 if __name__ == '__main__':
     os.environ['PROJ_LIB'] = r'D:\Program Files\PostgreSQL\13\share\contrib\postgis-3.0\proj'
+
     excel_path = r'../9.22BYD/2021.9.22result.xlsx'
     image_path = r'D:/Code/Al/jz/rpcortho_bydquyu_jz.tif'
     sheet_name = 'Chla'
@@ -93,20 +96,21 @@ if __name__ == '__main__':
 
     data = read_data(excel_path, sheet_name, cols)
     chla, lon_list, lat_list = data[:, 0], data[:, 1], data[:, 2]
-    # print(chla)
-    # print(lon_list)
-    # print(lat_list)
 
     dataset = gdal.Open(image_path)
     DN = lonlat2DN(dataset, lon_list, lat_list)
-    
-    # DN = [[[705]], [[440]], [[368]], [[384]], [[281]], [[368]], [[401]], [[375]], [[424]], [[390]], [[375]], [[325]],
-    #       [[299]], [[271]], [[292]], [[386]], [[411]], [[656]], [[660]], [[541]], [[773]], [[784]], [[863]], [[623]],
-    #       [[849]], [[862]], [[907]], [[880]], [[1086]], [[889]], [[1147]], [[2184]]]
-    # 数据预处理
-    
-    DN = DN.reshape(20,32)
+    DN = DN.reshape(20, 32).T.tolist()
     print(DN)
+    print(chla)
+    # data_dict = {
+    #     'DN': DN,
+    #     'chal':chla.tolist()
+    # }
+
+    # with open('../data/data.json', 'w') as f:
+    #     json.dump(data_dict,f)
+    # pccs = np.corrcoef(chla,DN[0])
+    # print(DN)
     # D = []
     # for i in range(len(DN)):
     # 	D.insert(i,DN[i][0])

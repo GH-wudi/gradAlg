@@ -10,7 +10,7 @@ import pandas as pd
 import tensorflow as tf
 
 from IO import *
-from src.toEach import lonlat2imagexy
+from test.toEach import lonlat2imagexy
 
 
 def normalization(a):

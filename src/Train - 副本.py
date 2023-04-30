@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
 
 from IO import *
-from toEach import lonlat2imagexy
+from test.toEach import lonlat2imagexy
 
 
 def normalization(a):

@@ -80,7 +80,7 @@ def write_image(dataset, out_path, a, bands):
 	del out
 
 
-def read_para(path):
+def read_json(path):
 	"""读取参数
 
 	:param String path: 参数json文件所在的位置
@@ -96,6 +96,7 @@ def write_json(path,data):
 	:param String path: 要保存的路径
 	:param dict data: 要写入的数据
 	"""
+
 	with open(path,'w') as f:
 		json.dump(data,f)
 
