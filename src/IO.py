@@ -90,10 +90,10 @@ def read_json(path):
 		return json.load(f)
 
 
-def write_json(path,data):
+def write_json(path: str,data: dict):
 	"""写入到json文件里
 
-	:param String path: 要保存的路径
+	:param str path: 要保存的路径
 	:param dict data: 要写入的数据
 	"""
 

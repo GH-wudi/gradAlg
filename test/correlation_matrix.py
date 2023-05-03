@@ -26,3 +26,5 @@ cmap = sns.diverging_palette(230, 20, as_cmap=True)
 # Draw the heatmap with the mask and correct aspect ratio
 sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5})
+hist_fig = ax.get_figure()
+f.savefig('./test.png', dpi = 400)
